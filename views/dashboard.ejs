@@ -1,0 +1,6 @@
+<h2>Student Dashboard</h2>
+<p>Welcome, <%= currentUser && (currentUser.name || currentUser.email) %>!</p>
+
+<form action="/logout" method="POST">
+  <button type="submit">Logout</button>
+</form>
