@@ -27,6 +27,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
+  transition: background 0.3s ease;
+
 }
 
 .navbar .logo {
@@ -56,6 +58,11 @@ body {
   padding: 6px 12px;
   border-radius: 4px;
   color: var(--pitt-blue);
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
 }
 
 /* HERO SECTION */
@@ -90,12 +97,12 @@ body {
 }
 
 /* FEATURES SECTION */
-.features {
+#features {
   padding: 60px 40px;
   text-align: center;
 }
 
-.features h2 {
+#features h2 {
   color: var(--pitt-blue);
   margin-bottom: 35px;
 }
@@ -121,6 +128,88 @@ body {
   color: var(--pitt-blue);
   margin-bottom: 10px;
 }
+
+/* About Section */
+
+#about {
+  padding: 60px 40px;
+  text-align: center;
+  background: var(--pitt-blue);
+}
+
+#about h2 {
+  color: var(--pitt-gold);
+  margin-bottom: 35px;
+}
+
+#about h3, h4 {
+   color: var(--pitt-gold);
+}
+
+.storyContainer h3 + p{
+  margin: 10px 0px;
+  color: var(--white);
+}
+
+.teamImages{
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.teamCard {
+  position: relative;
+  width: 260px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.teamCard img {
+  width: 100%;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.teamCard img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.teamCard .infoBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--white);
+  color: var(--dark-gray);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.teamCard.active img {
+  opacity: 0;
+}
+
+.teamCard.active .infoBox {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
 
 /* CTA BANNER */
 .cta-banner {

@@ -19,6 +19,10 @@ mongoose.connect(process.env.MONGO_URL)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+//---------- Connect CSS & JS to ejs ----------
+app.use(express.static(path.join(__dirname, "public")));
+
+
 // ---------- MIDDLEWARE ----------
 app.use(express.urlencoded({ extended: true })); // form data
 
@@ -38,7 +42,7 @@ app.use((req, res, next) => {
 app.use('/', authRoutes);
 
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('index');
 });
 
 app.get('/dashboard', requireAuth, (req, res) => {
