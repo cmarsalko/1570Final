@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panther Planner Sign Up</title>
-  <link rel="stylesheet" href="signup.css">
+  <link rel="stylesheet" href="/signup.css">
 </head>
 <body>
 
@@ -15,16 +13,22 @@
     <h1>Create Account</h1>
     <p class="subtitle">Join Panther Planner!</p>
 
-    <form>
+    <% if (error) { %>
+      <div class="error-message" style="color: red; padding: 10px; margin-bottom: 15px; background: #fee; border-radius: 4px;">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <form method="POST" action="/auth/signup">
 
       <label>Full Name</label>
-      <input type="text" placeholder="John Doe" required>
+      <input type="text" name="name" placeholder="John Doe" required>
 
       <label>Email</label>
-      <input type="email" placeholder="yourname@pitt.edu" required>
+      <input type="email" name="email" placeholder="yourname@pitt.edu" required>
 
       <label>Password</label>
-      <input type="password" placeholder="Enter a password" required>
+      <input type="password" name="password" placeholder="Enter a password" required>
 
       <label>Confirm Password</label>
       <input type="password" placeholder="Confirm your password" required>
@@ -37,13 +41,13 @@
       <span>OR</span>
     </div>
 
-    <button class="passport-btn" onclick="location.href='2study-dashboard.html'">
+    <button type="button" class="passport-btn" onclick="location.href='/dashboard'">
       Sign Up with Pitt Passport
     </button>
 
     <p class="login-text">
       Already have an account?
-      <a href="login.html">Log in</a>
+      <a href="/auth/login">Log in</a>
     </p>
 
   </div>
@@ -51,6 +55,5 @@
 </div>
 
 </body>
-</html>
 
 

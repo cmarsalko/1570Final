@@ -5,11 +5,14 @@ const User = require('../models/User');
 const router = express.Router();
 
 // --- SIGNUP ---
-router.get('/signup', (req, res) => {
+router.get('/auth/signup', (req, res) => {
   res.render('signup', { error: null });
 });
 
-router.post('/signup', async (req, res) => {
+router.post('/auth/signup', async (req, res) => {
+console.log('Signup POST route hit!');
+  console.log('Request body:', req.body);
+
   try {
     const { name, email, password, major } = req.body;
 
@@ -47,15 +50,22 @@ router.post('/signup', async (req, res) => {
 });
 
 // --- LOGIN ---
-router.get('/login', (req, res) => {
+router.get('/auth/login', (req, res) => {
   res.render('login', { error: null });
 });
 
-router.post('/login', async (req, res) => {
+router.post('/auth/login', async (req, res) => {
+
+  console.log('Login POST route hit!');
+  console.log('Request body:', req.body);
   try {
     const { email, password } = req.body;
-
+    console.log('Looking for user with email:', email);
+  
     const user = await User.findOne({ email });
+    console.log('User found:', user ? 'YES' : 'NO');
+
+
     if (!user) {
       return res.render('login', { error: 'Invalid email or password' });
     }

@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pitt Login</title>
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="/login.css">
 </head>
 <body>
 
@@ -15,13 +13,19 @@
     <h1>Panther Planner</h1>
     <p class="subtitle">Log in to continue</p>
 
-    <form>
+    <form method="POST" action="/auth/login">
+
+    <% if (error) { %>
+        <div class="error-message" style="color: red; padding: 10px; margin-bottom: 15px; background: #fee; border-radius: 4px;">
+          <%= error %>
+        </div>
+      <% } %>
 
       <label>Email</label>
-      <input type="email" placeholder="yourname@pitt.edu" required>
+      <input type="email" name="email" placeholder="yourname@pitt.edu" required>
 
       <label>Password</label>
-      <input type="password" placeholder="Enter your password" required>
+      <input type="password" name="password" placeholder="Enter your password" required>
 
       <button type="submit" class="login-btn">Login</button>
 
@@ -31,13 +35,13 @@
       <span>OR</span>
     </div>
 
-    <button class="passport-btn" onclick="location.href='2study-dashboard.html'">
+    <button type="button" class="passport-btn" onclick="location.href='/dashboard'">
       Login with Pitt Passport
     </button>
 
     <p class="signup-text">
       Don't have an account? 
-      <a href="signup.html">Sign up here</a>
+      <a href="/auth/signup">Sign up here</a>
     </p>
 
   </div>
@@ -45,6 +49,5 @@
 </div>
 
 </body>
-</html>
 
 
