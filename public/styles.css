@@ -1,0 +1,252 @@
+/* Pitt Colors */
+:root {
+  --pitt-blue: #003594;
+  --pitt-gold: #FFB81C;
+  --white: #ffffff;
+  --dark-gray: #1a1a1a;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  color: var(--dark-gray);
+}
+
+/* NAVBAR */
+.navbar {
+  background-color: var(--pitt-blue);
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  transition: background 0.3s ease;
+
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--pitt-gold);
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--white);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: var(--pitt-gold);
+}
+
+.signup-btn {
+  background: var(--pitt-gold);
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: var(--pitt-blue);
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+}
+
+/* HERO SECTION */
+.hero {
+  text-align: center;
+  padding: 90px 20px;
+  background: linear-gradient(135deg, var(--pitt-blue), #001d4d);
+  color: var(--white);
+}
+
+.hero h1 {
+  font-size: 3rem;
+  color: var(--pitt-gold);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin: 15px 0 25px;
+}
+
+.cta-btn {
+  background: var(--pitt-gold);
+  color: var(--pitt-blue);
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.cta-btn:hover {
+  background: var(--white);
+}
+
+/* FEATURES SECTION */
+#features {
+  padding: 60px 40px;
+  text-align: center;
+}
+
+#features h2 {
+  color: var(--pitt-blue);
+  margin-bottom: 35px;
+}
+
+.feature-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  background: var(--white);
+  border: 2px solid var(--pitt-gold);
+  border-radius: 8px;
+  padding: 25px;
+  width: 260px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.feature-card h3 {
+  color: var(--pitt-blue);
+  margin-bottom: 10px;
+}
+
+/* About Section */
+
+#about {
+  padding: 60px 40px;
+  text-align: center;
+  background: var(--pitt-blue);
+}
+
+#about h2 {
+  color: var(--pitt-gold);
+  margin-bottom: 35px;
+}
+
+#about h3, h4 {
+   color: var(--pitt-gold);
+}
+
+.storyContainer h3 + p{
+  margin: 10px 0px;
+  color: var(--white);
+}
+
+.teamImages{
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.teamCard {
+  position: relative;
+  width: 260px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.teamCard img {
+  width: 100%;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.teamCard img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.teamCard .infoBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--white);
+  color: var(--dark-gray);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.teamCard.active img {
+  opacity: 0;
+}
+
+.teamCard.active .infoBox {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+
+/* CTA BANNER */
+.cta-banner {
+  background: var(--pitt-blue);
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--white);
+}
+
+.cta-btn.large {
+  padding: 15px 40px;
+  margin-top: 20px;
+}
+
+/* FOOTER */
+.footer {
+  background: var(--pitt-blue);
+  color: var(--pitt-gold);
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .feature-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}
+
