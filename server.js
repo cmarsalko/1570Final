@@ -7,13 +7,12 @@ const path = require('path');
 
 const authRoutes = require('./routes/auth');
 const { requireAuth, requireAdmin } = require('./middleware/auth');
+const { connectDB } = require('../DBconnect');
 
 const app = express();
 
 // ---------- DB CONNECTION ----------
-mongoose.connect(process.env.MONGO_URL)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+connectDB();
 
 // ---------- VIEW ENGINE ----------
 app.set('view engine', 'ejs');
