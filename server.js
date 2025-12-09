@@ -43,6 +43,12 @@ app.use((req, res, next) => {
 app.use(express.static('public'));
 
 // ---------- ROUTES ----------
+
+app.get('/index', (req, res) => {
+  res.render('index');
+});
+
+
 app.use('/', authRoutes);
 
 app.use('/', requireAuth, profileRoutes);
@@ -62,10 +68,6 @@ app.get('/create-session', requireAuth, (req, res) => {
 
 app.get('/admin', requireAdmin, (req, res) => {
   res.render('admin-dashboarde');
-});
-
-app.get('/index', (req, res) => {
-  res.render('index');
 });
 
 // ---------- SERVER ----------
