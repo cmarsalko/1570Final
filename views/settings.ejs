@@ -24,6 +24,12 @@
 
     <h1>Settings</h1>
 
+    <% if (error) { %>
+      <div class="error-message" style="color: red; padding: 10px; margin-bottom: 15px; background: #fee; border-radius: 4px;">
+        <%= error %>
+      </div>
+    <% } %>
+
     <div class="settings-card">
 
       <h2>Account Settings</h2>

@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const { requireAuth, requireAdmin } = require('../middleware/auth');
 
-console.log('Settings routes file loaded'); // Add this
+console.log('Settings routes file loaded');
 
 
 router.get('/settings', requireAuth, async (req, res) => {
   const user = await User.findById(req.user._id);
-  res.render('settings', { currentUser: user });
+  res.render('settings', { currentUser: user, error:null });
 });
 
 
@@ -50,8 +50,8 @@ router.post('/settings', requireAuth, async (req, res) => {
 
     await user.save();
 
-    res.render('settings', { 
-      success: 'Account updated successfully!', 
+    res.render('settings', {
+      error:null,
       currentUser: user 
     });
   } catch (err) {
