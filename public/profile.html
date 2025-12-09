@@ -17,7 +17,7 @@
       <li><a href="create-session.html">Create Session</a></li>
       <li><a href="profile.html">My Profile</a></li>
       <li><a href="settings.html">Settings</a></li>
-      <li><a class="logout" href="PP.html">Logout</a></li>
+      <li><a class="logout" href="PP.html">Home</a></li>
     </ul>
   </aside>
   
@@ -30,26 +30,26 @@
       <div class="profile-photo-section">
         <img id="profileImage" src="https://via.placeholder.com/140" alt="Profile Photo" />
         <input type="file" id="photoUpload" accept="image/*" />
-        <button class="upload-btn" onclick="uploadPhoto()">Change Photo</button>
+        <button type="button" class="upload-btn" onclick="uploadPhoto()">Change Photo</button>
       </div>
 
       <div class="profile-details">
         <label>Name</label>
-        <input type="text" value="John Doe" />
+        <input type="text" name="name" value="John Doe" />
 
         <label>Email</label>
-        <input type="email" value="johndoe@pitt.edu" />
+        <input type="email" name="email" value="johndoe@pitt.edu" />
 
         <label>Major</label>
-        <input type="text" value="Information Science" />
+        <input type="text" name="major" value="Information Science" />
 
         <label>Interests</label>
-        <input type="text" value="Programming, Math, Study Groups" />
+        <input type="text" name="interests" value="Programming, Math, Study Groups" />
 
         <label>About Me</label>
-        <textarea>Hi! I'm a student at Pitt looking to join study sessions.</textarea>
+        <textarea name="about">Hi! I'm a student at Pitt looking to join study sessions.</textarea>
 
-        <button class="save-btn">Save Changes</button>
+        <button type="button" class="save-btn">Save Changes</button>
       </div>
 
     </div>
@@ -58,22 +58,7 @@
 
 </div>
 
-<script>
-function uploadPhoto() {
-  const fileInput = document.getElementById("photoUpload");
-  const imageDisplay = document.getElementById("profileImage");
-
-  if (fileInput.files && fileInput.files[0]) {
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-      imageDisplay.src = e.target.result;
-    };
-
-    reader.readAsDataURL(fileInput.files[0]);
-  }
-}
-</script>
+<script src="profile.js"></script>
 
 </body>
 </html>

@@ -11,15 +11,18 @@ const { requireAuth, requireAdmin } = require('./middleware/auth');
 const app = express();
 
 // ---------- DB CONNECTION ----------
-mongoose.connect(process.env.MONGO_URL)
+
+const { connectDB } = require('./DBconnect'); // this allow express to read JSON from the body of the HTML request
+connectDB();
+/*mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
-
+*/
 // ---------- VIEW ENGINE ----------
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-//---------- Connect CSS & JS to ejs ----------
+//---------- Connect CSS & js to ejs ----------
 app.use(express.static(path.join(__dirname, "public")));
 
 
@@ -46,8 +49,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/dashboard', requireAuth, (req, res) => {
+    console.log('Session user:', req.session.user);
   res.render('dashboard');
 });
+
 
 app.get('/admin', requireAdmin, (req, res) => {
   res.render('admin-dashboard');
