@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pitt Study Admin Dashboard</title>
+  <link rel="stylesheet" href="/admin-page.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+  <aside class="sidebar">
+    <h2 class="sidebar-title">Pitt Study Hub – Admin</h2>
+    <ul class="sidebar-links">
+      <li><a href="#">Admin Dashboard</a></li>
+      <li><a href="#">Manage Sessions</a></li>
+      <li><a href="#">Manage Users</a></li>
+      <li><a href="#">Admin Settings</a></li>
+      <li><a class="logout" href="#">Back to Site</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+
+    <header class="top-bar">
+      <h1>Admin – Study Session Dashboard</h1>
+      <div class="user-info">
+        Signed in as Admin:
+        <%= currentUser && currentUser.name ? currentUser.name : 'Admin' %>
+      </div>
+    </header>
+
+    <!-- ACTIVE SESSIONS (STATIC PREVIEW OR CAN BE REPLACED WITH EJS LOOPS) -->
+    <section class="session-section">
+      <h2>Active Study Sessions</h2>
+
+      <div class="session-card">
+        <h3>INFSCI 1570 – Network & Web Data Tech</h3>
+        <p><strong>Time:</strong> 6:00 PM – 7:30 PM</p>
+        <p><strong>Location:</strong> Hillman Library – 4th Floor Study Room</p>
+        <p><strong>Hosted By:</strong> Alex Johnson</p>
+        <div class="admin-actions">
+          <button type="button" class="btn-close">Close Session</button>
+          <button type="button" class="btn-feature">Feature</button>
+          <button type="button" class="danger btn-delete">Delete</button>
+        </div>
+      </div>
+
+      <div class="session-card">
+        <h3>CS 1501 – Algorithm Implementation</h3>
+        <p><strong>Time:</strong> 4:30 PM – 6:00 PM</p>
+        <p><strong>Location:</strong> Sennott Square – 5th Floor Lounge</p>
+        <p><strong>Hosted By:</strong> Jamie Lee</p>
+        <div class="admin-actions">
+          <button type="button" class="btn-close">Close Session</button>
+          <button type="button" class="btn-feature">Feature</button>
+          <button type="button" class="danger btn-delete">Delete</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CLOSED SESSIONS (STATIC PREVIEW) -->
+    <section class="session-section closed">
+      <h2>Closed Study Sessions</h2>
+
+      <div class="session-card">
+        <h3>STAT 1000 – Applied Statistics</h3>
+        <p><strong>Time:</strong> 1:00 PM – 2:15 PM</p>
+        <p><strong>Location:</strong> Posvar Hall – Lobby Tables</p>
+        <p><strong>Hosted By:</strong> Taylor Smith</p>
+        <div class="admin-actions">
+          <button type="button" class="btn-reopen">Reopen</button>
+          <button type="button" class="danger btn-delete">Delete</button>
+        </div>
+      </div>
+
+      <div class="session-card">
+        <h3>PHYS 0174 – Basic Physics</h3>
+        <p><strong>Time:</strong> 10:00 AM – 11:30 AM</p>
+        <p><strong>Location:</strong> Benedum – 2nd Floor Lounge</p>
+        <p><strong>Hosted By:</strong> Morgan Davis</p>
+        <div class="admin-actions">
+          <button type="button" class="btn-reopen">Reopen</button>
+          <button type="button" class="danger btn-delete">Delete</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK ADMIN STATS (STATIC PREVIEW) -->
+    <section class="session-section">
+      <h2>Admin Overview</h2>
+      <div class="session-card">
+        <p><strong>Total Users:</strong> <%= stats && stats.userCount ? stats.userCount : 128 %></p>
+        <p><strong>Active Sessions:</strong> <%= stats && stats.activeSessionCount ? stats.activeSessionCount : 5 %></p>
+        <p><strong>Closed Sessions Today:</strong> <%= stats && stats.closedTodayCount ? stats.closedTodayCount : 3 %></p>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<script src="/admin-page.js"></script>
+</body>
+</html>
