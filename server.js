@@ -11,7 +11,7 @@ const { attachUser, requireAuth, requireAdmin } = require('./middleware/auth');
 const profileRoutes = require('./routes/profile')
 const settingsRoutes = require('./routes/settings')
 
-const { connectDB } = require('./DBconnect');
+const connectDB = require('./DBconnect');
 
 const app = express();
 
@@ -24,7 +24,6 @@ app.set('views', path.join(__dirname, 'views'));
 
 // ---------- MIDDLEWARE ----------
 app.use(express.urlencoded({ extended: true })); // form data
-app.use(express.json());
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'dev-secret',
@@ -32,27 +31,27 @@ app.use(session({
   saveUninitialized: false
 }));
 
-app.use(attachUser)
-
 // make user available to all views
 app.use((req, res, next) => {
   res.locals.currentUser = req.session.user || null;
   next();
 });
 
+app.use(attachUser)
+
 app.use(express.static('public'));
+app.use(express.json());
 
 // ---------- ROUTES ----------
+app.use('/', authRoutes);
+app.use('/', requireAuth, profileRoutes);
+app.use('/', settingRoutes)
+
 
 app.get('/index', (req, res) => {
   res.render('index');
 });
 
-
-app.use('/', authRoutes);
-
-app.use('/', requireAuth, profileRoutes);
-app.use('/', requireAuth, settingsRoutes);
 
 app.get('/dashboard', requireAuth, (req, res) => {
   res.render('study-dashboard');
@@ -66,8 +65,8 @@ app.get('/create-session', requireAuth, (req, res) => {
   res.render('create-session');
 });
 
-app.get('/admin', requireAdmin, (req, res) => {
-  res.render('admin-dashboarde');
+app.get('/admin', requireAuth, requireAdmin, (req, res) => {
+  res.render('admin-page');
 });
 
 // ---------- SERVER ----------
