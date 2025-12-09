@@ -1,9 +1,8 @@
-// settings.js
 document.addEventListener("DOMContentLoaded", () => {
-  const saveBtn = document.querySelector(".save-btn");
+  const form = document.getElementById("settingsForm"); // wrap your inputs in a <form id="settingsForm">
   const emailInput = document.querySelector('input[name="email"]');
-  const passwordInput = document.querySelector('input[name="password"]');
-  const confirmInput = document.querySelector('input[name="confimPass"]'); // note typo matches HTML
+  const passwordInput = document.querySelector('input[name="newPassword"]'); // match HTML name
+  const confirmInput = document.querySelector('input[name="confirm"]'); // match HTML name
   const checkboxes = document.querySelectorAll('.switch input[type="checkbox"]');
 
   // --- Load saved values from localStorage ---
@@ -25,20 +24,31 @@ document.addEventListener("DOMContentLoaded", () => {
     cb.addEventListener("change", () => localStorage.setItem("temp_" + cb.name, cb.checked));
   });
 
-  // --- Clear localStorage when Save Changes is clicked ---
-  saveBtn.addEventListener("click", () => {
-    // Optional: Validate passwords match
-    if (passwordInput.value && passwordInput.value !== confirmInput.value) {
-      alert("Passwords do not match!");
-      return;
+  // --- Validate and clear localStorage on form submit ---
+  form.addEventListener("submit", (e) => {
+    // Only validate if user typed a new password
+    if (passwordInput.value || confirmInput.value) {
+      if (!passwordInput.value) {
+        e.preventDefault();
+        alert("Please enter a new password.");
+        return;
+      }
+      if (!confirmInput.value) {
+        e.preventDefault();
+        alert("Please confirm your new password.");
+        return;
+      }
+      if (passwordInput.value !== confirmInput.value) {
+        e.preventDefault();
+        alert("Passwords do not match!");
+        return;
+      }
     }
 
-    alert("Settings saved!");
+    // Clear localStorage on successful submit
     localStorage.removeItem("temp_email");
     localStorage.removeItem("temp_password");
     localStorage.removeItem("temp_confirm");
     checkboxes.forEach(cb => localStorage.removeItem("temp_" + cb.name));
-
-    location.reload();
   });
 });

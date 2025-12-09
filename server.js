@@ -6,7 +6,11 @@ const session = require('express-session');
 const path = require('path');
 
 const authRoutes = require('./routes/auth');
-const { requireAuth, requireAdmin } = require('./middleware/auth');
+const { attachUser, requireAuth, requireAdmin } = require('./middleware/auth');
+
+const profileRoutes = require('./routes/profile')
+const settingRoutes = require('./routes/settings')
+
 const { connectDB } = require('./DBconnect');
 
 const app = express();
@@ -33,11 +37,16 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(attachUser)
+
 app.use(express.static('public'));
+app.use(express.json());
 
 // ---------- ROUTES ----------
-console.log('Auth routes loaded');
 app.use('/', authRoutes);
+app.use('/', requireAuth, profileRoutes);
+app.use('/', settingRoutes)
+
 
 app.get('/index', (req, res) => {
   res.render('index');
@@ -45,14 +54,6 @@ app.get('/index', (req, res) => {
 
 app.get('/dashboard', requireAuth, (req, res) => {
   res.render('study-dashboard');
-});
-
-app.get('/settings', requireAuth, (req, res) => {
-  res.render('settings');
-});
-
-app.get('/profile', requireAuth, (req, res) => {
-  res.render('profile');
 });
 
 app.get('/home', requireAuth, (req, res) => {

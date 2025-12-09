@@ -41,7 +41,6 @@ console.log('Signup POST route hit!');
       email: user.email,
       role: user.role
     };
-
     res.redirect('/dashboard');
   } catch (err) {
     console.error(err);
@@ -82,7 +81,7 @@ router.post('/auth/login', async (req, res) => {
       role: user.role
     };
 
-    res.redirect('/dashboard');
+    res.redirect('/home');
   } catch (err) {
     console.error(err);
     res.render('login', { error: 'Something went wrong, please try again' });

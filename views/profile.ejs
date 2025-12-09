@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,25 +32,27 @@
         <button type="button" class="upload-btn" onclick="uploadPhoto()">Change Photo</button>
       </div>
 
+      <form action="/profile" method="POST">
+
       <div class="profile-details">
         <label>Name</label>
-        <input type="text" name="name" value="John Doe" />
+        <input type="text" name="name" value="<%= currentUser.name %>" required>
 
         <label>Email</label>
-        <input type="email" name="email" value="johndoe@pitt.edu" />
+        <input type="email" name="email" value="<%= currentUser.email %>" required>
 
         <label>Major</label>
-        <input type="text" name="major" value="Information Science" />
+        <input type="text" name="major" placeholder="ex. Information Science" value="<%= currentUser.major %>">
 
-        <label>Interests</label>
-        <input type="text" name="interests" value="Programming, Math, Study Groups" />
+        <label>Classes</label>
+        <input type="text" name="classes" placeholder="ex. Computation in Information Science, PS1307" value="<%= currentUser.classes ? currentUser.classes.join(', ') : '' %>">
 
         <label>About Me</label>
-        <textarea name="about">Hi! I'm a student at Pitt looking to join study sessions.</textarea>
+        <textarea name="about"><%= currentUser.about %></textarea>
 
-        <button type="button" class="save-btn">Save Changes</button>
+        <button type="submit" class="save-btn">Save Changes</button>
       </div>
-
+      </form>
     </div>
 
   </main>
@@ -61,5 +62,4 @@
 <script src="/profile.js"></script>
 
 </body>
-</html>
 

@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panther Planner — Welcome John</title>
+  <title>Panther Planner — Welcome</title>
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -20,7 +18,7 @@
   </nav>
 
   <section class="hero">
-    <h1>Welcome back, John Doe!</h1>
+    <h1>Welcome back, <%= currentUser.name %>!</h1>
     <p>Ready to plan your next study session?</p>
 
     <div style="margin-top: 25px;">
@@ -51,5 +49,4 @@
   </section>
 
 </body>
-</html>
 
