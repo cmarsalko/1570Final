@@ -43,15 +43,16 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // ---------- ROUTES ----------
-app.use('/', authRoutes);
-app.use('/', requireAuth, profileRoutes);
-app.use('/', settingRoutes)
-
 
 app.get('/index', (req, res) => {
   res.render('index');
 });
 
+
+app.use('/', authRoutes);
+
+app.use('/', requireAuth, profileRoutes);
+app.use('/', requireAuth, settingRoutes);
 
 app.get('/dashboard', requireAuth, (req, res) => {
   res.render('study-dashboard');
