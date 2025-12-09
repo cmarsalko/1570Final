@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); 
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -7,7 +7,7 @@ const path = require('path');
 
 const authRoutes = require('./routes/auth');
 const { requireAuth, requireAdmin } = require('./middleware/auth');
-const { connectDB } = require('../DBconnect');
+const { connectDB } = require('./DBconnect');
 
 const app = express();
 
