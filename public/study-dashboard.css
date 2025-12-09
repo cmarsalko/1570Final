@@ -89,6 +89,7 @@ body {
 .session-card h3 {
   margin-bottom: 8px;
   color: var(--pitt-blue);
+  cursor: pointer;
 }
 
 .closed-session {
@@ -104,6 +105,16 @@ body {
   .sidebar {
     width: 100%;
   }
+}
+
+/* Collapsed state */
+.session-card.collapsed p {
+  display: none; /* hide all paragraphs */
+}
+
+.session-card.collapsed {
+  cursor: pointer; /* indicate it’s clickable */
+  background-color: #e0e0e0; /* optional, for visual feedback */
 }
 
 

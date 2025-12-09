@@ -11,15 +11,12 @@ const { connectDB } = require('./DBconnect');
 
 const app = express();
 
+// ---------- DB CONNECTION ----------
 connectDB();
 
 // ---------- VIEW ENGINE ----------
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
-//---------- Connect CSS & JS to ejs ----------
-app.use(express.static(path.join(__dirname, "public")));
-
 
 // ---------- MIDDLEWARE ----------
 app.use(express.urlencoded({ extended: true })); // form data
@@ -36,19 +33,38 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static('public'));
+
 // ---------- ROUTES ----------
+console.log('Auth routes loaded');
 app.use('/', authRoutes);
 
-app.get('/', (req, res) => {
+app.get('/index', (req, res) => {
   res.render('index');
 });
 
 app.get('/dashboard', requireAuth, (req, res) => {
-  res.render('dashboard');
+  res.render('study-dashboard');
+});
+
+app.get('/settings', requireAuth, (req, res) => {
+  res.render('settings');
+});
+
+app.get('/profile', requireAuth, (req, res) => {
+  res.render('profile');
+});
+
+app.get('/home', requireAuth, (req, res) => {
+  res.render('PP');
+});
+
+app.get('/create-session', requireAuth, (req, res) => {
+  res.render('create-session');
 });
 
 app.get('/admin', requireAdmin, (req, res) => {
-  res.render('admin-dashboard');
+  res.render('admin-dashboarde');
 });
 
 // ---------- SERVER ----------

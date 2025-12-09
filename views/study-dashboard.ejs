@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pitt Study Dashboard</title>
-  <link rel="stylesheet" href="study-dashboard.css">
+  <link rel="stylesheet" href="/study-dashboard.css">
 </head>
-<body>
 
 <div class="dashboard-container">
 
+
   <aside class="sidebar">
-    <h2 class="sidebar-title">Panther Planner</h2>
+    <h2 class="sidebar-title">Pitt Study Hub</h2>
     <ul class="sidebar-links">
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">My Sessions</a></li>
-      <li><a href="#">Create Session</a></li>
-      <li><a href="#">Settings</a></li>
-      <li><a class="logout" href="#">Logout</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/create-session">Create Session</a></li>
+      <li><a href="/profile">My Profile</a></li>
+      <li><a href="/settings">Settings</a></li>
+      <li><a class="logout" href="/home">Home</a></li>
     </ul>
   </aside>
+  
 
   <main class="content">
 
@@ -55,7 +56,6 @@
 
     <section class="session-section closed">
       <h2>Closed Study Sessions</h2>
-
       <div class="session-card closed-session">
         <h3>Microeconomics Review</h3>
         <p><strong>Time:</strong> 11:00 AM – 12:00 PM</p>
@@ -82,7 +82,7 @@
   </main>
 
 </div>
-
+<script src="/study-dashboard.js"></script>
 </body>
 </html>
 

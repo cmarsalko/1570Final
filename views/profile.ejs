@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile</title>
+  <link rel="stylesheet" href="/profile.css" />
+</head>
+<body>
+
+<div class="profile-container">
+
+  <aside class="sidebar">
+    <h2 class="sidebar-title">Pitt Study Hub</h2>
+    <ul class="sidebar-links">
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/create-session">Create Session</a></li>
+      <li><a href="/profile">My Profile</a></li>
+      <li><a href="/settings">Settings</a></li>
+      <li><a class="logout" href="/home">Home</a></li>
+    </ul>
+  </aside>
+  
+
+  <main class="content">
+    <h1>My Profile</h1>
+
+    <div class="profile-card">
+
+      <div class="profile-photo-section">
+        <img id="profileImage" src="https://via.placeholder.com/140" alt="Profile Photo" />
+        <input type="file" id="photoUpload" accept="image/*" />
+        <button type="button" class="upload-btn" onclick="uploadPhoto()">Change Photo</button>
+      </div>
+
+      <div class="profile-details">
+        <label>Name</label>
+        <input type="text" name="name" value="John Doe" />
+
+        <label>Email</label>
+        <input type="email" name="email" value="johndoe@pitt.edu" />
+
+        <label>Major</label>
+        <input type="text" name="major" value="Information Science" />
+
+        <label>Interests</label>
+        <input type="text" name="interests" value="Programming, Math, Study Groups" />
+
+        <label>About Me</label>
+        <textarea name="about">Hi! I'm a student at Pitt looking to join study sessions.</textarea>
+
+        <button type="button" class="save-btn">Save Changes</button>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script src="/profile.js"></script>
+
+</body>
+</html>
+
