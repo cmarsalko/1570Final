@@ -1,0 +1,147 @@
+:root {
+  --pitt-blue: #003594;
+  --pitt-gold: #FFB81C;
+  --white: #ffffff;
+  --light-gray: #f2f2f2;
+  --dark-gray: #1a1a1a;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--light-gray);
+}
+
+.create-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: var(--pitt-blue);
+  color: var(--white);
+  padding: 25px;
+}
+
+.sidebar-title {
+  color: var(--pitt-gold);
+  font-size: 1.7rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar-links {
+  list-style: none;
+}
+
+.sidebar-links li {
+  margin: 15px 0;
+}
+
+.sidebar-links a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.sidebar-links a:hover,
+.sidebar-links .active {
+  color: var(--pitt-gold);
+  font-weight: bold;
+}
+
+.logout {
+  color: var(--pitt-gold);
+}
+
+/* FORM CONTAINER */
+.content {
+  flex: 1;
+  padding: 40px 60px;
+}
+
+.content h1 {
+  color: var(--pitt-blue);
+  margin-bottom: 25px;
+}
+
+.session-form {
+  background: var(--white);
+  padding: 30px 25px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.session-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: var(--pitt-blue);
+}
+
+.session-form input,
+.session-form select,
+.session-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 18px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.optional-btn {
+  background: none;
+  border: none;
+  color: var(--pitt-blue);
+  font-weight: bold;
+  margin-bottom: 10px;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+}
+
+.optional-section {
+  display: none;
+}
+
+textarea {
+  height: 90px;
+  resize: vertical;
+}
+
+.create-btn {
+  background: var(--pitt-gold);
+  color: var(--pitt-blue);
+  border: none;
+  padding: 12px;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.create-btn:hover {
+  background: var(--pitt-blue);
+  color: var(--white);
+}
+
+@media (max-width: 800px) {
+  .create-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+}
+
