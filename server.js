@@ -9,7 +9,7 @@ const authRoutes = require('./routes/auth');
 const { attachUser, requireAuth, requireAdmin } = require('./middleware/auth');
 
 const profileRoutes = require('./routes/profile')
-const settingRoutes = require('./routes/settings')
+const settingsRoutes = require('./routes/settings')
 
 const { connectDB } = require('./DBconnect');
 
@@ -52,7 +52,7 @@ app.get('/index', (req, res) => {
 app.use('/', authRoutes);
 
 app.use('/', requireAuth, profileRoutes);
-app.use('/', requireAuth, settingRoutes);
+app.use('/', requireAuth, settingsRoutes);
 
 app.get('/dashboard', requireAuth, (req, res) => {
   res.render('study-dashboard');
