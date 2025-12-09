@@ -11,7 +11,7 @@ const { attachUser, requireAuth, requireAdmin } = require('./middleware/auth');
 const profileRoutes = require('./routes/profile')
 const settingRoutes = require('./routes/settings')
 
-const { connectDB } = require('./DBconnect');
+const connectDB = require('./DBconnect');
 
 const app = express();
 
