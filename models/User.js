@@ -6,7 +6,9 @@ const userSchema = new mongoose.Schema({
   passwordHash: { type: String, required: true },
   role: { type: String, enum: ['student', 'admin'], default: 'student' },
   major: String,
-  classes: [String]
+  classes: [String],
+  about: String,
+  photoURL: String
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
