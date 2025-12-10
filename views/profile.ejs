@@ -1,0 +1,63 @@
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile</title>
+  <link rel="stylesheet" href="/profile.css" />
+</head>
+<body>
+
+<div class="profile-container">
+
+  <aside class="sidebar">
+    <h2 class="sidebar-title">Pitt Study Hub</h2>
+    <ul class="sidebar-links">
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/create-session">Create Session</a></li>
+      <li><a href="/profile">My Profile</a></li>
+      <li><a href="/settings">Settings</a></li>
+      <li><a class="logout" href="/home">Home</a></li>
+    </ul>
+  </aside>
+  
+
+  <main class="content">
+    <h1>My Profile</h1>
+
+    <div class="profile-card">
+
+      <div class="profile-photo-section">
+
+      </div>
+
+      <form action="/profile" method="POST">
+
+      <div class="profile-details">
+        <label>Name</label>
+        <input type="text" name="name" value="<%= currentUser.name %>" required>
+
+        <label>Email</label>
+        <input type="email" name="email" value="<%= currentUser.email %>" required>
+
+        <label>Major</label>
+        <input type="text" name="major" placeholder="ex. Information Science" value="<%= currentUser.major %>">
+
+        <label>Classes</label>
+        <input type="text" name="classes" placeholder="ex. Computation in Information Science, PS1307" value="<%= currentUser.classes ? currentUser.classes.join(', ') : '' %>">
+
+        <label>About Me</label>
+        <textarea name="about"><%= currentUser.about %></textarea>
+
+        <button type="submit" class="save-btn">Save Changes</button>
+      </div>
+      </form>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="/profile.js"></script>
+
+</body>
+

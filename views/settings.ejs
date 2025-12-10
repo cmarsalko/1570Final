@@ -1,0 +1,96 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+  <link rel="stylesheet" href="/settings.css">
+</head>
+<body>
+
+<div class="settings-container">
+
+
+  <aside class="sidebar">
+    <h2 class="sidebar-title">Pitt Study Hub</h2>
+    <ul class="sidebar-links">
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/create-session">Create Session</a></li>
+      <li><a href="/profile">My Profile</a></li>
+      <li><a href="/settings">Settings</a></li>
+      <li><a class="logout" href="/home">Home</a></li>
+
+      <% if (currentUser && currentUser.role === 'admin') { %>
+      <li><a href="/admin" class="admin-link">Admin Page</a></li>
+      <% } %>
+    </ul>
+  </aside>
+
+  <main class="content">
+
+    <h1>Settings</h1>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="error-message" style="color: red; padding: 10px; margin-bottom: 15px; background: #fee; border-radius: 4px;">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <div class="settings-card">
+
+      <h2>Account Settings</h2>
+      <form action="/settings" method="POST">
+      <label>Change Email</label>
+      <input type="email" name="email" placeholder="<%= currentUser.email %>">
+
+      <label>Current Password</label>
+      <input type="password" name="currentPassword" placeholder="Current Password">
+
+      <label>Change Password</label>
+      <input type="password" name="newPassword" placeholder="New Password">
+
+      <label>Confirm New Password</label>
+      <input type="password" name="confirmPassword" placeholder="Confirm Password">
+
+      <button type="submit" class="save-btn">Save Changes</button>
+      </form>
+      <hr>
+
+      <h2>Notification Settings</h2>
+
+      <label class="setting-row">
+        <span>Email me when someone joins my study session</span>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </label>
+
+      <label class="setting-row">
+        <span>Email me reminders 30 min before my sessions</span>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </label>
+
+      <label class="setting-row">
+        <span>Notify me about new study sessions nearby</span>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </label>
+
+      <button class="delete-btn">Delete Account</button>
+
+    </div>
+
+  </main>
+
+</div>
+<script src="/settings.js"></script>
+</body>
+
+
+
+
+

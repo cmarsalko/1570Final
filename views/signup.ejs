@@ -1,0 +1,59 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panther Planner Sign Up</title>
+  <link rel="stylesheet" href="/signup.css">
+</head>
+<body>
+
+<div class="signup-container">
+
+  <div class="signup-card">
+
+    <h1>Create Account</h1>
+    <p class="subtitle">Join Panther Planner!</p>
+
+    <% if (error) { %>
+      <div class="error-message" style="color: red; padding: 10px; margin-bottom: 15px; background: #fee; border-radius: 4px;">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <form method="POST" action="/auth/signup">
+
+      <label>Full Name</label>
+      <input type="text" name="name" placeholder="John Doe" required>
+
+      <label>Email</label>
+      <input type="email" name="email" placeholder="yourname@pitt.edu" required>
+
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Enter a password" required>
+
+      <label>Confirm Password</label>
+      <input type="password" placeholder="Confirm your password" required>
+
+      <button type="submit" class="signup-btn">Sign Up</button>
+
+    </form>
+
+    <div class="divider">
+      <span>OR</span>
+    </div>
+
+    <button type="button" class="passport-btn" onclick="location.href='/home'">
+      Sign Up with Pitt Passport
+    </button>
+
+    <p class="login-text">
+      Already have an account?
+      <a href="/auth/login">Log in</a>
+    </p>
+
+  </div>
+
+</div>
+
+</body>
+
+

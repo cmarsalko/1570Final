@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pitt Study Dashboard</title>
+  <link rel="stylesheet" href="/study-dashboard.css">
+</head>
+
+<div class="dashboard-container">
+
+
+  <aside class="sidebar">
+    <h2 class="sidebar-title">Pitt Study Hub</h2>
+    <ul class="sidebar-links">
+    <li><a href="/dashboard">Dashboard</a></li>
+    <li><a href="/create-session">Create Session</a></li>
+    <li><a href="/profile">My Profile</a></li>
+    <li><a href="/settings">Settings</a></li>
+    <li><a href="/home">Home</a></li>
+
+    <% if (currentUser && currentUser.role === 'admin') { %>
+      <li><a href="/admin-page" class="admin-link">Admin Page</a></li>
+    <% } %>
+  </ul>
+  </aside>
+  
+
+  <main class="content">
+
+    <header class="top-bar">
+      <h1>Study Session Dashboard</h1>
+      <div class="user-info">Welcome, <%= currentUser.name %>!</div>
+    </header>
+
+    <section class="session-section">
+
+      <div class="section-header">
+        <h2>Active Study Sessions</h2>
+        <a href="/create-session" class="create-btn">Create Session</a>
+      </div>
+
+      <% if (!activeSessions || activeSessions.length === 0) { %>
+        <p>No active study sessions yet. Be the first to create one!</p>
+      <% } else { %>
+        <% activeSessions.forEach(function(session) { %>
+          <div class="session-card">
+            <h3><%= session.subject %></h3>
+            <p>
+              <strong>Time:</strong>
+              <%= session.date.toDateString() %>, 
+              <%= session.startTime %> – <%= session.endTime %>
+            </p>
+            <p>
+              <strong>Location:</strong>
+              <%= session.building %> – Room <%= session.room %>
+            </p>
+            <p><strong>Hosted By:</strong> <%= session.hostedBy %></p>
+            <% if (session.additionalNotes) { %>
+              <p><strong>Notes:</strong> <%= session.additionalNotes %></p>
+            <% } %>
+          </div>
+        <% }); %>
+      <% } %>
+
+    </section>
+
+    <section class="session-section closed">
+      <h2>Closed Study Sessions</h2>
+
+      <% if (!closedSessions || closedSessions.length === 0) { %>
+        <p>No closed sessions yet.</p>
+      <% } else { %>
+        <% closedSessions.forEach(function(session) { %>
+          <div class="session-card closed-session">
+            <h3><%= session.subject %></h3>
+            <p>
+              <strong>Time:</strong>
+              <%= session.date.toDateString() %>, 
+              <%= session.startTime %> – <%= session.endTime %>
+            </p>
+            <p>
+              <strong>Location:</strong>
+              <%= session.building %> – Room <%= session.room %>
+            </p>
+            <p><strong>Hosted By:</strong> <%= session.hostedBy %></p>
+            <% if (session.additionalNotes) { %>
+              <p><strong>Notes:</strong> <%= session.additionalNotes %></p>
+            <% } %>
+          </div>
+        <% }); %>
+      <% } %>
+    </section>
+
+  </main>
+
+</div>
+<script src="/study-dashboard.js"></script>
+</body>
+</html>
