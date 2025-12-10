@@ -20,14 +20,15 @@
     <li><a href="/home">Home</a></li>
 
     <% if (currentUser && currentUser.role === 'admin') { %>
-      <li><a href="/admin-page" class="admin-link">Admin Page</a></li>
-    <% } %>
+  <li><a href="/admin" class="admin-link">Admin Page</a></li>
+<% } %>
   </ul>
   </aside>
   
 
   <main class="content">
 
+<<<<<<< HEAD
     <% function twelveHourTime(timeString) {
       let [hour, minute] = timeString.split(':');
       hour = parseInt(hour);
@@ -35,6 +36,28 @@
       hour = hour % 12 || 12;
       return hour + ':' + minute + ' ' + amOrPM;
     } %>
+=======
+    <% 
+      function twelveHourTime(timeString) {
+        let [hour, minute] = timeString.split(':');
+        hour = parseInt(hour);
+        const amOrPM = hour >= 12 ? 'PM' : 'AM';
+        hour = hour % 12 || 12;
+        return hour + ':' + minute + ' ' + amOrPM;
+      }
+
+      function formatSessionDate(date) {
+        const d = new Date(date);
+        return d.toLocaleDateString('en-US', {
+          weekday: 'short',
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+          timeZone: 'UTC'
+        });
+      }
+    %>
+>>>>>>> b1dba84 (ability to change from to admin and updated times)
     
     <header class="top-bar">
       <h1>Study Session Dashboard</h1>
@@ -56,7 +79,11 @@
             <h3><%= session.subject %></h3>
             <p>
               <strong>Time:</strong>
+<<<<<<< HEAD
               <%= session.date.toDateString() %>, 
+=======
+              <%= formatSessionDate(session.date) %>, 
+>>>>>>> b1dba84 (ability to change from to admin and updated times)
               <%= twelveHourTime(session.startTime) %> – <%= twelveHourTime(session.endTime) %>
             </p>
             <p>
@@ -84,7 +111,11 @@
             <h3><%= session.subject %></h3>
             <p>
               <strong>Time:</strong>
+<<<<<<< HEAD
               <%= session.date.toDateString() %>, 
+=======
+              <%= formatSessionDate(session.date) %>, 
+>>>>>>> b1dba84 (ability to change from to admin and updated times)
               <%= twelveHourTime(session.startTime) %> – <%= twelveHourTime(session.endTime) %>
             </p>
             <p>
@@ -100,9 +131,89 @@
       <% } %>
     </section>
 
+    <% if (currentUser && currentUser.role !== 'admin') { %>
+      <!-- Floating Admin Access button -->
+      <button class="admin-upgrade-btn" id="adminUpgradeBtn">
+        Admin Access
+      </button>
+
+      <!-- Admin password modal -->
+      <div id="adminModal" class="admin-modal hidden">
+        <div class="admin-modal-content">
+          <h2>Admin Access</h2>
+
+          <form id="adminUpgradeForm">
+            <label for="adminPassword">Admin password</label>
+            <input
+              type="password"
+              id="adminPassword"
+              name="password"
+              required
+            >
+
+            <div class="admin-modal-actions">
+              <button type="submit" class="admin-modal-submit">Submit</button>
+              <button type="button" id="adminModalClose" class="admin-modal-cancel">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    <% } %>
   </main>
 
 </div>
 <script src="/study-dashboard.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const upgradeBtn = document.getElementById('adminUpgradeBtn');
+    const modal = document.getElementById('adminModal');
+    const closeBtn = document.getElementById('adminModalClose');
+    const form = document.getElementById('adminUpgradeForm');
+    const passwordInput = document.getElementById('adminPassword');
+
+    if (!upgradeBtn || !modal || !closeBtn || !form || !passwordInput) {
+      return;
+    }
+
+    upgradeBtn.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      passwordInput.value = '';
+      passwordInput.focus();
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const password = passwordInput.value.trim();
+      if (!password) return;
+
+      try {
+        const res = await fetch('/admin/upgrade', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          alert('You are now an admin!');
+          window.location.reload();
+        } else {
+          alert(data.message || 'Upgrade failed');
+        }
+      } catch (err) {
+        console.error('Admin upgrade error:', err);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  });
+</script>
 </body>
 </html>

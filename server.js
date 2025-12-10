@@ -10,8 +10,9 @@ const { attachUser, requireAuth, requireAdmin } = require('./middleware/auth');
 const profileRoutes = require('./routes/profile');
 const settingsRoutes = require('./routes/settings'); 
 const sessionsRoutes = require('./routes/sessionsRoutes');
-const connectDB = require('./DBconnect');
+const { connectDB } = require('./DBconnect');
 const Session = require('./models/Sessions'); 
+const User = require('./models/User');
 
 const app = express();
 
@@ -77,9 +78,13 @@ app.get('/dashboard', requireAuth, async (req, res) => {
       }
     });
 
+      const adminError =
+      req.query.adminError === '1' ? 'Incorrect admin password.' : null;
+
     res.render('study-dashboard', {
       activeSessions,
-      closedSessions
+      closedSessions,
+      adminError
     });
   } catch (err) {
     console.error('Error loading dashboard:', err);
@@ -168,6 +173,35 @@ app.get('/admin', requireAuth, requireAdmin, (req, res) => {
   };
 
   res.render('admin-page', { stats });
+});
+
+// ---------- ADMIN UPGRADE ROUTE ----------
+app.post('/admin/upgrade', requireAuth, async (req, res) => {
+  try {
+    const { password } = req.body;
+
+    const ADMIN_UPGRADE_PASSWORD = process.env.ADMIN_UPGRADE_PASSWORD || 'admin';
+
+    if (password !== ADMIN_UPGRADE_PASSWORD) {
+      return res.status(400).json({ success: false, message: 'Incorrect password' });
+    }
+
+    // Must be logged in
+    if (!req.session.user?.id) {
+      return res.status(401).json({ success: false, message: 'Not logged in' });
+    }
+
+    // Update DB role
+    await User.findByIdAndUpdate(req.session.user.id, { role: 'admin' });
+
+    // Update session role
+    req.session.user.role = 'admin';
+
+    return res.json({ success: true });
+  } catch (err) {
+    console.error('Error upgrading to admin:', err);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
 });
 
 // ---------- SERVER ----------

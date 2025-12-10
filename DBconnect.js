@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
 
 
+<<<<<<< HEAD
 let mongoDB =  ("mongodb+srv://"+
                  process.env.DB_USERNAME+
                  ":"
@@ -9,6 +10,16 @@ let mongoDB =  ("mongodb+srv://"+
                  +process.env.HOST+
                  "/"
                  +process.env.DATABASE+
+=======
+let mongoDB = ("mongodb+srv://"+
+                 process.env.DB_USERNAME+
+                 ":"+
+                 process.env.DB_PASSWORD+
+                 "@"+
+                 process.env.HOST+
+                 "/"+
+                 process.env.DATABASE+
+>>>>>>> b1dba84 (ability to change from to admin and updated times)
                 "?retryWrites=true&w=majority");
 console.log(mongoDB);
 
@@ -27,4 +38,4 @@ const connectDB = async () => {
 
 
 
-module.exports = connectDB;
+module.exports = { connectDB };
