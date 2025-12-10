@@ -17,6 +17,10 @@
       <li><a href="/profile">My Profile</a></li>
       <li><a href="/settings">Settings</a></li>
       <li><a class="logout" href="/home">Home</a></li>
+
+      <% if (currentUser && currentUser.role === 'admin') { %>
+  <li><a href="/admin" class="admin-link">Admin Page</a></li>
+<% } %>
     </ul>
   </aside>
   

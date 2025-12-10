@@ -28,7 +28,6 @@
 
   <main class="content">
 
-<<<<<<< HEAD
     <% function twelveHourTime(timeString) {
       let [hour, minute] = timeString.split(':');
       hour = parseInt(hour);
@@ -36,28 +35,6 @@
       hour = hour % 12 || 12;
       return hour + ':' + minute + ' ' + amOrPM;
     } %>
-=======
-    <% 
-      function twelveHourTime(timeString) {
-        let [hour, minute] = timeString.split(':');
-        hour = parseInt(hour);
-        const amOrPM = hour >= 12 ? 'PM' : 'AM';
-        hour = hour % 12 || 12;
-        return hour + ':' + minute + ' ' + amOrPM;
-      }
-
-      function formatSessionDate(date) {
-        const d = new Date(date);
-        return d.toLocaleDateString('en-US', {
-          weekday: 'short',
-          year: 'numeric',
-          month: 'short',
-          day: '2-digit',
-          timeZone: 'UTC'
-        });
-      }
-    %>
->>>>>>> b1dba84 (ability to change from to admin and updated times)
     
     <header class="top-bar">
       <h1>Study Session Dashboard</h1>
@@ -79,11 +56,7 @@
             <h3><%= session.subject %></h3>
             <p>
               <strong>Time:</strong>
-<<<<<<< HEAD
               <%= session.date.toDateString() %>, 
-=======
-              <%= formatSessionDate(session.date) %>, 
->>>>>>> b1dba84 (ability to change from to admin and updated times)
               <%= twelveHourTime(session.startTime) %> – <%= twelveHourTime(session.endTime) %>
             </p>
             <p>
@@ -111,11 +84,7 @@
             <h3><%= session.subject %></h3>
             <p>
               <strong>Time:</strong>
-<<<<<<< HEAD
               <%= session.date.toDateString() %>, 
-=======
-              <%= formatSessionDate(session.date) %>, 
->>>>>>> b1dba84 (ability to change from to admin and updated times)
               <%= twelveHourTime(session.startTime) %> – <%= twelveHourTime(session.endTime) %>
             </p>
             <p>
@@ -143,7 +112,7 @@
           <h2>Admin Access</h2>
 
           <form id="adminUpgradeForm">
-            <label for="adminPassword">Admin password</label>
+            <label for="adminPassword">Admin password - to upgrade to admin, enter the admin password that was set in .env</label>
             <input
               type="password"
               id="adminPassword"

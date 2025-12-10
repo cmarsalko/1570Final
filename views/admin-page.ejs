@@ -11,12 +11,8 @@
 <div class="dashboard-container">
 
   <aside class="sidebar">
-    <h2 class="sidebar-title">Pitt Study Hub – Admin</h2>
+    <h2 class="sidebar-title">Panther Planner - Admin</h2>
     <ul class="sidebar-links">
-      <li><a href="#">Admin Dashboard</a></li>
-      <li><a href="#">Manage Sessions</a></li>
-      <li><a href="#">Manage Users</a></li>
-      <li><a href="#">Admin Settings</a></li>
       <li><a class="logout" href="/dashboard">Back to Site</a></li>
     </ul>
   </aside>
@@ -31,64 +27,104 @@
       </div>
     </header>
 
-    <!-- ACTIVE SESSIONS (STATIC PREVIEW OR CAN BE REPLACED WITH EJS LOOPS) -->
+        <!-- ACTIVE SESSIONS -->
     <section class="session-section">
       <h2>Active Study Sessions</h2>
 
-      <div class="session-card">
-        <h3>INFSCI 1570 – Network & Web Data Tech</h3>
-        <p><strong>Time:</strong> 6:00 PM – 7:30 PM</p>
-        <p><strong>Location:</strong> Hillman Library – 4th Floor Study Room</p>
-        <p><strong>Hosted By:</strong> Alex Johnson</p>
-        <div class="admin-actions">
-          <button type="button" class="btn-close">Close Session</button>
-          <button type="button" class="btn-feature">Feature</button>
-          <button type="button" class="danger btn-delete">Delete</button>
-        </div>
-      </div>
+      <% if (activeSessions && activeSessions.length > 0) { %>
+        <% activeSessions.forEach(function (session) { %>
+          <div class="session-card">
+            <h3><%= session.subject %></h3>
+            <p><strong>Time:</strong> <%= session.dateFormatted %> <%= session.startTime %> – <%= session.endTime %></p>
+            <p><strong>Location:</strong> <%= session.building %> – <%= session.room %></p>
+            <p><strong>Hosted By:</strong> <%= session.hostedBy %></p>
 
-      <div class="session-card">
-        <h3>CS 1501 – Algorithm Implementation</h3>
-        <p><strong>Time:</strong> 4:30 PM – 6:00 PM</p>
-        <p><strong>Location:</strong> Sennott Square – 5th Floor Lounge</p>
-        <p><strong>Hosted By:</strong> Jamie Lee</p>
-        <div class="admin-actions">
-          <button type="button" class="btn-close">Close Session</button>
-          <button type="button" class="btn-feature">Feature</button>
-          <button type="button" class="danger btn-delete">Delete</button>
-        </div>
-      </div>
-
+            <div class="admin-actions">
+              <form method="POST" action="/admin/sessions/<%= session._id %>/close">
+                <button type="submit" class="btn-close">Close Session</button>
+              </form>
+              <form method="POST" action="/admin/sessions/<%= session._id %>/delete" onsubmit="return confirm('Delete this session?');">
+                <button type="submit" class="danger btn-delete">Delete</button>
+              </form>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p>No active sessions.</p>
+      <% } %>
     </section>
 
-    <!-- CLOSED SESSIONS (STATIC PREVIEW) -->
+    <!-- CLOSED SESSIONS -->
     <section class="session-section closed">
       <h2>Closed Study Sessions</h2>
 
-      <div class="session-card">
-        <h3>STAT 1000 – Applied Statistics</h3>
-        <p><strong>Time:</strong> 1:00 PM – 2:15 PM</p>
-        <p><strong>Location:</strong> Posvar Hall – Lobby Tables</p>
-        <p><strong>Hosted By:</strong> Taylor Smith</p>
-        <div class="admin-actions">
-          <button type="button" class="btn-reopen">Reopen</button>
-          <button type="button" class="danger btn-delete">Delete</button>
-        </div>
-      </div>
+      <% if (closedSessions && closedSessions.length > 0) { %>
+        <% closedSessions.forEach(function (session) { %>
+          <div class="session-card">
+            <h3><%= session.subject %></h3>
+            <p><strong>Time:</strong> <%= session.dateFormatted %> <%= session.startTime %> – <%= session.endTime %></p>
+            <p><strong>Location:</strong> <%= session.building %> – <%= session.room %></p>
+            <p><strong>Hosted By:</strong> <%= session.hostedBy %></p>
 
-      <div class="session-card">
-        <h3>PHYS 0174 – Basic Physics</h3>
-        <p><strong>Time:</strong> 10:00 AM – 11:30 AM</p>
-        <p><strong>Location:</strong> Benedum – 2nd Floor Lounge</p>
-        <p><strong>Hosted By:</strong> Morgan Davis</p>
-        <div class="admin-actions">
-          <button type="button" class="btn-reopen">Reopen</button>
-          <button type="button" class="danger btn-delete">Delete</button>
-        </div>
-      </div>
+            <div class="admin-actions">
+              <form method="POST" action="/admin/sessions/<%= session._id %>/reopen">
+                <button type="submit" class="btn-reopen">Reopen</button>
+              </form>
+              <form method="POST" action="/admin/sessions/<%= session._id %>/delete" onsubmit="return confirm('Delete this session?');">
+                <button type="submit" class="danger btn-delete">Delete</button>
+              </form>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p>No closed sessions.</p>
+      <% } %>
     </section>
 
-<<<<<<< HEAD
+    <!-- USER MANAGEMENT -->
+    <div class="manage-users-section">
+      <h3>Manage Users</h3>
+
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(user => { %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td>
+                <span class="role-badge <%= user.role === 'admin' ? 'admin' : '' %>">
+                  <%= user.role %>
+                </span>
+              </td>
+              <td>
+                <div class="user-actions">
+                  <form action="/admin/users/<%= user._id %>/toggle-role" method="POST">
+                    <button class="user-action-btn user-action-btn--primary" type="submit">
+                      <%= user.role === 'admin' ? 'Make Student' : 'Make Admin' %>
+                    </button>
+                  </form>
+
+                  <form action="/admin/users/<%= user._id %>/delete" method="POST">
+                    <button class="user-action-btn user-action-btn--danger" type="submit">
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
     <!-- QUICK ADMIN STATS (STATIC PREVIEW) -->
     <section class="session-section">
       <h2>Admin Overview</h2>
@@ -99,8 +135,6 @@
       </div>
     </section>
 
-=======
->>>>>>> 4e1ec484ad86bf7c8e966cb8c78b3293782ea8d3
   </main>
 
 </div>
