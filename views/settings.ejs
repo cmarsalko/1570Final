@@ -24,12 +24,15 @@
 
     <h1>Settings</h1>
 
+<<<<<<< HEAD
     <% if (error) { %>
       <div class="error-message" style="color: red; padding: 10px; margin-bottom: 15px; background: #fee; border-radius: 4px;">
         <%= error %>
       </div>
     <% } %>
 
+=======
+>>>>>>> 4e1ec484ad86bf7c8e966cb8c78b3293782ea8d3
     <div class="settings-card">
 
       <h2>Account Settings</h2>
@@ -37,6 +40,7 @@
       <label>Change Email</label>
       <input type="email" name="email" placeholder=<%= currentUser.email %>>
 
+<<<<<<< HEAD
       <label>Current Password</label>
       <input type="password" name="currentPassword" placeholder="Current Password">
 
@@ -45,6 +49,13 @@
 
       <label>Confirm New Password</label>
       <input type="password" name="confirmPassword" placeholder="Confirm Password">
+=======
+      <label>Change Password</label>
+      <input type="password" name="newpassword" placeholder="New Password">
+
+      <label>Confirm New Password</label>
+      <input type="password" name="confirm" placeholder="Confirm Password">
+>>>>>>> 4e1ec484ad86bf7c8e966cb8c78b3293782ea8d3
 
       <button type="submit" class="save-btn">Save Changes</button>
       </form>
@@ -83,6 +94,7 @@
   </main>
 
 </div>
+<script src="/settings.js"></script>
 </body>
 
 

@@ -9,8 +9,9 @@ const authRoutes = require('./routes/auth');
 const { attachUser, requireAuth, requireAdmin } = require('./middleware/auth');
 
 const profileRoutes = require('./routes/profile')
-const settingsRoutes = require('./routes/settings')
-const { connectDB } = require('./DBconnect');
+
+const settingRoutes = require('./routes/settings')
+const connectDB = require('./DBconnect');
 
 const app = express();
 
@@ -42,11 +43,13 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // ---------- ROUTES ----------
+app.use('/', authRoutes);
+app.use('/', requireAuth, profileRoutes);
+app.use('/', settingRoutes)
 
 app.get('/index', (req, res) => {
   res.render('index');
 });
-
 
 app.use('/', authRoutes);
 
@@ -67,6 +70,13 @@ app.get('/create-session', requireAuth, (req, res) => {
 
 app.get('/admin', requireAuth, requireAdmin, (req, res) => {
   res.render('admin-page');
+  const stats = {
+    userCount: 1,          // you can keep these as placeholders for now
+    activeSessionCount: 0,
+    closedTodayCount: 0
+  };
+
+  res.render('admin-page', { stats });
 });
 
 // ---------- SERVER ----------
