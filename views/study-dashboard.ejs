@@ -28,6 +28,14 @@
 
   <main class="content">
 
+    <% function twelveHourTime(timeString) {
+      let [hour, minute] = timeString.split(':');
+      hour = parseInt(hour);
+      const amOrPM = hour >= 12 ? 'PM' : 'AM';
+      hour = hour % 12 || 12;
+      return hour + ':' + minute + ' ' + amOrPM;
+    } %>
+    
     <header class="top-bar">
       <h1>Study Session Dashboard</h1>
       <div class="user-info">Welcome, <%= currentUser.name %>!</div>
@@ -49,7 +57,7 @@
             <p>
               <strong>Time:</strong>
               <%= session.date.toDateString() %>, 
-              <%= session.startTime %> – <%= session.endTime %>
+              <%= twelveHourTime(session.startTime) %> – <%= twelveHourTime(session.endTime) %>
             </p>
             <p>
               <strong>Location:</strong>
@@ -77,7 +85,7 @@
             <p>
               <strong>Time:</strong>
               <%= session.date.toDateString() %>, 
-              <%= session.startTime %> – <%= session.endTime %>
+              <%= twelveHourTime(session.startTime) %> – <%= twelveHourTime(session.endTime) %>
             </p>
             <p>
               <strong>Location:</strong>
