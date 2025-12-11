@@ -3,12 +3,13 @@
   --pitt-gold: #FFB81C;
   --white: #ffffff;
   --light-gray: #f2f2f2;
+  --dark-gray: #1a1a1a;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
   background: var(--light-gray);
+  font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,120 +17,119 @@ body {
 }
 
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.login-card {
   background: var(--white);
-  padding: 35px 30px;
+  padding: 40px 35px;
   width: 100%;
-  max-width: 420px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   text-align: center;
 }
 
-.login-card h1 {
+.login-container h1 {
   color: var(--pitt-blue);
-  margin-bottom: 10px;
+  font-size: 1.9rem;
+  margin-bottom: 20px;
 }
 
-.subtitle {
-  color: #666;
-  margin-bottom: 25px;
-}
-
-label {
+.login-container label {
   display: block;
   text-align: left;
-  margin-top: 12px;
   font-weight: bold;
+  margin-bottom: 5px;
   color: var(--pitt-blue);
 }
 
-input {
+.login-container input {
   width: 100%;
   padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-top: 5px;
+  font-size: 1rem;
 }
 
 .login-btn {
-  background: var(--pitt-blue);
-  color: var(--white);
-  border: none;
+  background: var(--pitt-gold);
+  color: var(--pitt-blue);
   padding: 12px;
   width: 100%;
-  font-size: 1rem;
+  border: none;
+  font-size: 1.1rem;
   font-weight: bold;
-  border-radius: 6px;
   cursor: pointer;
-  margin-top: 20px;
+  border-radius: 5px;
 }
 
 .login-btn:hover {
-  background: var(--pitt-gold);
-  color: var(--pitt-blue);
-}
-
-.divider {
-  text-align: center;
-  margin: 20px 0;
-  position: relative;
-}
-
-.divider span {
-  background: var(--white);
-  padding: 0 10px;
-  position: relative;
-  z-index: 1;
-}
-
-.divider::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: #ccc;
-  z-index: 0;
-}
-
-.passport-btn {
-  background: var(--pitt-gold);
-  color: var(--pitt-blue);
-  border: none;
-  padding: 12px;
-  width: 100%;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.passport-btn:hover {
   background: var(--pitt-blue);
   color: var(--white);
 }
 
-.signup-text {
-  margin-top: 20px;
-  color: #444;
-  font-size: 0.9rem;
+.passport-btn {
+  background: var(--pitt-blue);
+  color: var(--white);
+  padding: 12px;
+  width: 100%;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
-.signup-text a {
+.passport-btn:hover {
+  background: var(--pitt-gold);
+  color: var(--pitt-blue);
+}
+
+.signup-link {
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+.signup-link a {
   color: var(--pitt-blue);
   font-weight: bold;
   text-decoration: none;
 }
 
-.signup-text a:hover {
-  text-decoration: underline;
+.signup-link a:hover {
+  color: var(--pitt-gold);
 }
+
+@media (max-width: 900px) {
+  .login-container {
+    max-width: 85%;
+    padding: 30px;
+  }
+  .login-container h1 {
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    padding: 25px;
+  }
+  .login-container h1 {
+    font-size: 1.5rem;
+  }
+  .login-container input {
+    padding: 10px;
+  }
+  .login-btn,
+  .passport-btn {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .login-container {
+    max-width: 420px;
+  }
+}
+
 

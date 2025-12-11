@@ -55,7 +55,6 @@ body {
   color: var(--pitt-gold);
 }
 
-/* FORM CONTAINER */
 .content {
   flex: 1;
   padding: 40px 60px;
@@ -130,18 +129,39 @@ textarea {
   color: var(--white);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .create-container {
     flex-direction: column;
   }
-
   .sidebar {
     width: 100%;
-    margin-bottom: 20px;
+    text-align: center;
   }
-
   .content {
     padding: 20px;
   }
+  .session-form {
+    max-width: 90%;
+  }
 }
+
+@media (max-width: 600px) {
+  .sidebar-title {
+    font-size: 1.4rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  .session-form {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .content {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+}
+
 
